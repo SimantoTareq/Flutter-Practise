@@ -1,12 +1,15 @@
 import 'dart:convert';
 
 import 'package:day_35/model/model.dart';
+import 'package:day_35/show_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/container.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:http/http.dart' as http;
 import 'package:modal_progress_hud_nsn/modal_progress_hud_nsn.dart';
+import 'package:cached_network_image/cached_network_image.dart';
+import 'package:flutter_spinkit/flutter_spinkit.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -18,7 +21,7 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   String link =
       "https://raw.githubusercontent.com/codeifitech/fitness-app/master/exercises.json?fbclid=IwAR1k6u_TREfKtEIFhvcoM--WsByKZzLtQci48vound6ezkivlWdZn0OaZLM";
-  List<Exercise> alldate = [];
+  List<Exercise> alldata = [];
   late Exercise exerciseModel;
   bool isLoading = false;
 
@@ -39,7 +42,7 @@ class _HomePageState extends State<HomePage> {
               gif: i['gif'],
               thumbnail: i['thumbnail']);
           setState(() {
-            alldate.add(exerciseModel);
+            alldata.add(exerciseModel);
           });
         }
         setState(() {
@@ -68,39 +71,68 @@ class _HomePageState extends State<HomePage> {
       inAsyncCall: isLoading == true,
       blur: 0.5,
       opacity: 0.5,
-      progressIndicator: CircularProgressIndicator(),
+      progressIndicator: spinkit,
       child: Scaffold(
         body: ListView.builder(
-          itemCount: alldate.length,
+          itemCount: alldata.length,
           shrinkWrap: true,
           itemBuilder: (context, index) {
-            return Container(
-                child: Card(
-              color: Color(0xffFEFBF6).withOpacity(0.9),
-              child: ListTile(
-                leading: Padding(
-                  padding: EdgeInsets.only(top: 40),
-                  child: Text("${alldate[index].id}",
-                      style:
-                          TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
+            return InkWell(
+              onTap: () {
+                Navigator.of(context).push(MaterialPageRoute(
+                    builder: (context) => Show_image(
+                          exerciseModel: alldata[index],
+                        )));
+              },
+              child: Container(
+                padding: EdgeInsets.all(8),
+                height: 180,
+                width: double.infinity,
+                child: Stack(
+                  children: [
+                    ClipRRect(
+                      borderRadius: BorderRadius.circular(12),
+                      child: CachedNetworkImage(
+                        width: double.infinity,
+                        fit: BoxFit.cover,
+                        imageUrl: "${alldata[index].thumbnail}",
+                        placeholder: (context, url) =>
+                            Image.asset("images/error.jpg"),
+                        errorWidget: (context, url, error) => Icon(Icons.error),
+                      ),
+                    ),
+                    Positioned(
+                      bottom: 0,
+                      left: 0,
+                      right: 0,
+                      child: Container(
+                        padding: EdgeInsets.all(16),
+                        height: 60,
+                        child: Center(
+                          child: Text(
+                            "${alldata[index]}",
+                            style: TextStyle(
+                                fontSize: 20,
+                                color: Colors.white70,
+                                fontWeight: FontWeight.bold),
+                          ),
+                        ),
+                        decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(12),
+                            gradient: LinearGradient(
+                                colors: [
+                                  Color.fromARGB(255, 184, 190, 195),
+                                  Color.fromARGB(197, 59, 59, 59),
+                                  Colors.transparent
+                                ],
+                                begin: Alignment.bottomCenter,
+                                end: Alignment.topCenter)),
+                      ),
+                    )
+                  ],
                 ),
-                title: Image(
-                  image: NetworkImage("${alldate[index].thumbnail}"),
-                  height: 100,
-                  width: 50,
-                  alignment: Alignment.topLeft,
-                ),
-                subtitle: Padding(
-                  padding: EdgeInsets.symmetric(vertical: 10),
-                  child: Text(
-                    "${alldate[index].title}",
-                    style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
-                  ),
-                ),
-                trailing: Image(image: NetworkImage("${alldate[index].gif}")),
-                contentPadding: EdgeInsets.all(20),
               ),
-            ));
+            );
           },
         ),
       ),
@@ -118,3 +150,8 @@ showToast(String title) {
       textColor: Colors.white,
       fontSize: 16.0);
 }
+
+const spinkit = SpinKitSpinningLines(
+  color: Color.fromARGB(255, 24, 23, 23),
+  size: 50.0,
+);
