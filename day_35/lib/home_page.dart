@@ -108,14 +108,24 @@ class _HomePageState extends State<HomePage> {
                       child: Container(
                         padding: EdgeInsets.all(16),
                         height: 60,
-                        child: Center(
-                          child: Text(
-                            "${alldata[index]}",
-                            style: TextStyle(
-                                fontSize: 20,
-                                color: Colors.white70,
-                                fontWeight: FontWeight.bold),
-                          ),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Text(
+                              "${alldata[index]}",
+                              style: TextStyle(
+                                  fontSize: 20,
+                                  color: Colors.white70,
+                                  fontWeight: FontWeight.bold),
+                            ),
+                            Text(
+                              "${alldata[index].seconds} Sec",
+                              style: TextStyle(
+                                  fontSize: 20,
+                                  fontWeight: FontWeight.bold,
+                                  color: Color(0xffEFF5F5)),
+                            )
+                          ],
                         ),
                         decoration: BoxDecoration(
                             borderRadius: BorderRadius.circular(12),
