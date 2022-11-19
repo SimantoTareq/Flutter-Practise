@@ -12,7 +12,24 @@ class CustomeHttp {
     Articles articles;
 
     var responce = await http.get(Uri.parse(
-        "https://newsapi.org/v2/everything?q=bitcoin&pageSize=20&apiKey=6f216ebce676448a8e7a27baa4b1f235"));
+        "https://newsapi.org/v2/everything?q=bitcoin&page=$pageNo&pageSize=10&sortBy=$sortBy&apiKey=6f216ebce676448a8e7a27baa4b1f235"));
+    print("responce is ${responce.body}");
+
+    var data = jsonDecode(responce.body);
+    for (var i in data["articles"]) {
+      articles = Articles.fromJson(i);
+      allNewsData.add(articles);
+    }
+
+    return allNewsData;
+  }
+
+  Future<List<Articles>> fetchSearchData({required String query}) async {
+    List<Articles> allNewsData = [];
+    Articles articles;
+
+    var responce = await http.get(Uri.parse(
+        "https://newsapi.org/v2/everything?q=$query&pageSize=10&apiKey=6f216ebce676448a8e7a27baa4b1f235"));
     print("responce is ${responce.body}");
 
     var data = jsonDecode(responce.body);
