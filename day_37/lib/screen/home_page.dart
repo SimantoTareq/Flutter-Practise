@@ -150,15 +150,12 @@ class _HomePageState extends State<HomePage> {
                   )),
                   ElevatedButton(
                       onPressed: () {
-                        setState(() {
-                          if (currentIndex > 1) {
-                            setState(() {
-                              currentIndex = currentIndex + 1;
-                            });
-                          }
-                        });
+                        if (currentIndex > 1) {
+                          currentIndex = currentIndex + 1;
+                          setState(() {});
+                        }
                       },
-                      child: Text("Next"))
+                      child: Text("Next")),
                 ],
               ),
             ),
