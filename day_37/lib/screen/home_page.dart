@@ -56,57 +56,6 @@ class _HomePageState extends State<HomePage> {
             physics: BouncingScrollPhysics(),
             child: Column(
               children: [
-                SizedBox(
-                  height: 50,
-                  child: Row(
-                    children: [
-                      ElevatedButton(
-                          onPressed: () {
-                            if (currentIndex < 1) {
-                            } else {
-                              setState(() {
-                                currentIndex = currentIndex - 1;
-                              });
-                            }
-                          },
-                          child: Text("Prev")),
-                      Flexible(
-                          child: ListView.builder(
-                        itemCount: 10,
-                        scrollDirection: Axis.horizontal,
-                        itemBuilder: (context, index) {
-                          return InkWell(
-                            onTap: () {
-                              setState(() {
-                                currentIndex = index + 1;
-                              });
-                            },
-                            child: Center(
-                              child: Container(
-                                color: index + 1 == currentIndex
-                                    ? Colors.blue
-                                    : Colors.transparent,
-                                padding: EdgeInsets.symmetric(horizontal: 10),
-                                child: Text("${index + 1}"),
-                              ),
-                            ),
-                          );
-                        },
-                      )),
-                      ElevatedButton(
-                          onPressed: () {
-                            setState(() {
-                              if (currentIndex > 1) {
-                                setState(() {
-                                  currentIndex = currentIndex + 1;
-                                });
-                              }
-                            });
-                          },
-                          child: Text("Next"))
-                    ],
-                  ),
-                ),
                 Container(
                     height: 80,
                     child: DropdownButton<String>(
@@ -153,8 +102,65 @@ class _HomePageState extends State<HomePage> {
                       },
                     );
                   },
-                )
+                ),
               ],
+            ),
+          ),
+        ),
+        bottomNavigationBar: BottomAppBar(
+          child: Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: SizedBox(
+              height: 50,
+              child: Row(
+                children: [
+                  ElevatedButton(
+                      onPressed: () {
+                        if (currentIndex < 1) {
+                        } else {
+                          setState(() {
+                            currentIndex = currentIndex - 1;
+                          });
+                        }
+                      },
+                      child: Text("Prev")),
+                  Flexible(
+                      child: ListView.builder(
+                    padding: EdgeInsets.symmetric(horizontal: 5),
+                    itemCount: 10,
+                    scrollDirection: Axis.horizontal,
+                    itemBuilder: (context, index) {
+                      return InkWell(
+                        onTap: () {
+                          setState(() {
+                            currentIndex = index + 1;
+                          });
+                        },
+                        child: Center(
+                          child: Container(
+                            color: index + 1 == currentIndex
+                                ? Colors.blue
+                                : Colors.transparent,
+                            padding: EdgeInsets.symmetric(horizontal: 10),
+                            child: Text("${index + 1}"),
+                          ),
+                        ),
+                      );
+                    },
+                  )),
+                  ElevatedButton(
+                      onPressed: () {
+                        setState(() {
+                          if (currentIndex > 1) {
+                            setState(() {
+                              currentIndex = currentIndex + 1;
+                            });
+                          }
+                        });
+                      },
+                      child: Text("Next"))
+                ],
+              ),
             ),
           ),
         ),
