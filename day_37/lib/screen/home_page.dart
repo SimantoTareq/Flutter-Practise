@@ -17,13 +17,13 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   List<String> list = <String>[
-    'relevancy',
-    'popularity',
-    'publishedAt',
+    "relevancy",
+    "popularity",
+    "publishedAt",
   ];
 
   int currentIndex = 1;
-  String sortBy = "popularity";
+  String sortBy = "relevancy";
 
   @override
   Widget build(BuildContext context) {
@@ -45,10 +45,11 @@ class _HomePageState extends State<HomePage> {
                 icon: Icon(Icons.search))
           ],
           title: Text(
-            "NewsApp",
-            style: myStyle(20, Color.fromARGB(255, 222, 223, 224)),
+            "The Guardian",
+            style: myStyle(20, Color.fromARGB(255, 24, 24, 24)),
           ),
           centerTitle: true,
+          backgroundColor: Color.fromARGB(228, 255, 255, 255).withOpacity(0.6),
         ),
         body: Container(
           padding: EdgeInsets.all(12),
