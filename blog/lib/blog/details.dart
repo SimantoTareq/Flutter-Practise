@@ -81,7 +81,10 @@ class _DetailsState extends State<Details> {
                               ),
                             ),
                             InkWell(
-                              onTap: () {},
+                              onTap: () {
+                                customDialog(
+                                    data['img'], data['title'], data['des']);
+                              },
                               child: Container(
                                 child: Text(
                                   'View Details',
@@ -104,5 +107,46 @@ class _DetailsState extends State<Details> {
         );
       },
     );
+  }
+
+  customDialog(String img, String title, String des) {
+    showDialog(
+        context: context,
+        builder: (context) {
+          return Dialog(
+            backgroundColor: Color(0xffB2B2B2).withOpacity(0.8),
+            child: Container(
+              padding: EdgeInsets.all(20),
+              height: 550,
+              child: SingleChildScrollView(
+                child: Column(
+                  children: [
+                    ClipRRect(
+                      child: Image.network(
+                        img,
+                        fit: BoxFit.cover,
+                      ),
+                      borderRadius: BorderRadius.circular(10),
+                    ),
+                    SizedBox(
+                      height: 10,
+                    ),
+                    Container(
+                      child: Text(title),
+                    ),
+                    SizedBox(
+                      height: 10,
+                    ),
+                    Container(
+                      child: Text(
+                        des,
+                      ),
+                    )
+                  ],
+                ),
+              ),
+            ),
+          );
+        });
   }
 }

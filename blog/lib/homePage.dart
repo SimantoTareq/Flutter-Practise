@@ -15,7 +15,11 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  final myPages = [Details(), Gallery(), Popular()];
+  final myPages = [
+    Details(),
+    Popular(),
+    Gallery(),
+  ];
   int indexpage = 0;
   @override
   Widget build(BuildContext context) {
