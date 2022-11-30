@@ -26,84 +26,94 @@ class _DetailsState extends State<Details> {
             child: CircularProgressIndicator(),
           );
         }
-        return ListView(
-          children: snapshot.data!.docs.map((DocumentSnapshot document) {
-            Map<String, dynamic> data = document.data() as Map<String, dynamic>;
-            return Container(
-              color: Color(0xff2B3A55).withOpacity(0.5),
-              padding: EdgeInsets.symmetric(vertical: 5),
-              height: 350,
-              child: Card(
-                color: Color(0xff2B3A55).withOpacity(0.1),
-                elevation: 5,
-                shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(10.0)),
-                child: Row(
-                  children: [
-                    Expanded(
-                        flex: 1,
-                        child: Container(
-                          child: ClipRRect(
-                            child: Image.network(
-                              data['img'],
-                              height: MediaQuery.of(context).size.height,
-                              fit: BoxFit.cover,
-                            ),
-                            borderRadius: BorderRadius.circular(10.0),
-                          ),
-                        )),
-                    Expanded(
-                        flex: 1,
-                        child: Column(
-                          children: [
-                            Container(
-                              padding: EdgeInsets.symmetric(vertical: 4),
-                              child: Text(
-                                data['title'],
-                                style: TextStyle(
-                                    color: Colors.white,
-                                    fontWeight: FontWeight.w600,
-                                    fontSize: 18),
+        return Scaffold(
+          appBar: AppBar(
+            title: Text("Details Page"),
+            centerTitle: true,
+            backgroundColor: Colors.transparent,
+          ),
+          body: ListView(
+            children: snapshot.data!.docs.map((DocumentSnapshot document) {
+              Map<String, dynamic> data =
+                  document.data() as Map<String, dynamic>;
+              return Container(
+                color: Color(0xff2B3A55).withOpacity(0.5),
+                padding: EdgeInsets.symmetric(vertical: 5),
+                height: 350,
+                child: Card(
+                  color: Color(0xff2B3A55).withOpacity(0.1),
+                  elevation: 5,
+                  shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(10.0)),
+                  child: Row(
+                    children: [
+                      Expanded(
+                          flex: 1,
+                          child: Container(
+                            child: ClipRRect(
+                              child: Image.network(
+                                data['img'],
+                                height: MediaQuery.of(context).size.height,
+                                fit: BoxFit.cover,
                               ),
+                              borderRadius: BorderRadius.circular(10.0),
                             ),
-                            SizedBox(
-                              height: 5,
-                            ),
-                            Container(
-                              padding: EdgeInsets.symmetric(horizontal: 6),
-                              child: Text(
-                                data['des'],
-                                maxLines: 10,
-                                style: TextStyle(
-                                    color: Colors.black,
-                                    fontSize: 16,
-                                    fontWeight: FontWeight.w400),
-                              ),
-                            ),
-                            InkWell(
-                              onTap: () {
-                                customDialog(
-                                    data['img'], data['title'], data['des']);
-                              },
-                              child: Container(
+                          )),
+                      Expanded(
+                          flex: 1,
+                          child: Column(
+                            children: [
+                              Container(
+                                padding: EdgeInsets.symmetric(vertical: 4),
                                 child: Text(
-                                  'View Details',
-                                  style: TextStyle(fontWeight: FontWeight.bold),
+                                  data['title'],
+                                  style: TextStyle(
+                                      color: Colors.white,
+                                      fontWeight: FontWeight.w600,
+                                      fontSize: 18),
                                 ),
-                                margin: EdgeInsets.all(25),
-                                padding: EdgeInsets.all(15),
-                                decoration: BoxDecoration(
-                                    color: Color(0xffEFEFEF),
-                                    borderRadius: BorderRadius.circular(25.0)),
                               ),
-                            )
-                          ],
-                        ))
-                  ],
+                              SizedBox(
+                                height: 5,
+                              ),
+                              Container(
+                                padding: EdgeInsets.symmetric(horizontal: 6),
+                                child: Text(
+                                  data['des'],
+                                  maxLines: 10,
+                                  style: TextStyle(
+                                      color: Colors.black,
+                                      fontSize: 16,
+                                      fontWeight: FontWeight.w400),
+                                ),
+                              ),
+                              InkWell(
+                                onTap: () {
+                                  customDialog(
+                                      data['img'], data['title'], data['des']);
+                                },
+                                child: Container(
+                                  child: Text(
+                                    'View Details',
+                                    style:
+                                        TextStyle(fontWeight: FontWeight.bold),
+                                  ),
+                                  margin: EdgeInsets.all(25),
+                                  padding: EdgeInsets.all(15),
+                                  decoration: BoxDecoration(
+                                      color: Color(0xffEFEFEF),
+                                      borderRadius:
+                                          BorderRadius.circular(25.0)),
+                                ),
+                              )
+                            ],
+                          ))
+                    ],
+                  ),
                 ),
-              ),
-            );
-          }).toList(),
+              );
+            }).toList(),
+          ),
         );
       },
     );

@@ -24,11 +24,6 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text("Home Page"),
-        centerTitle: true,
-        backgroundColor: Colors.transparent,
-      ),
       body: myPages[indexpage],
       bottomNavigationBar: CurvedNavigationBar(
         color: Color(0xffF2E5E5),
@@ -36,7 +31,7 @@ class _HomePageState extends State<HomePage> {
         items: [
           Icon(Icons.details_sharp, size: 30),
           Icon(Icons.list, size: 30),
-          Icon(Icons.compare_arrows, size: 30),
+          Icon(Icons.image_rounded, size: 30),
         ],
         onTap: (index) {
           setState(() {
