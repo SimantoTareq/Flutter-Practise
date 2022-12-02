@@ -26,6 +26,10 @@ class _splash_screenState extends State<splash_screen> {
 
   @override
   Widget build(BuildContext context) {
-    return Container();
+    return Container(
+      child: Center(
+        child: CircularProgressIndicator(),
+      ),
+    );
   }
 }
