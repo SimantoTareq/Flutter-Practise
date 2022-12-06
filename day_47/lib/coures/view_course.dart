@@ -1,4 +1,5 @@
 import 'package:day_47/coures/add_course.dart';
+import 'package:day_47/coures/update_course.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/container.dart';
 import 'package:flutter/src/widgets/framework.dart';
@@ -19,6 +20,24 @@ class _viewCourseState extends State<viewCourse> {
         isScrollControlled: true,
         context: context,
         builder: ((context) => addCourse()));
+  }
+
+  updateNewCourse(doucmentId, courseName, courseFee, img) {
+    return showModalBottomSheet(
+        backgroundColor: Colors.transparent,
+        isDismissible: true,
+        isScrollControlled: true,
+        context: context,
+        builder: ((context) =>
+            UpdateCourse(doucmentId, courseName, courseFee, img)));
+  }
+
+  Future<void> deleteData(selectData) {
+    return FirebaseFirestore.instance
+        .collection('courses')
+        .doc(selectData)
+        .delete()
+        .then((value) => print("Data is Delected"));
   }
 
   Stream<QuerySnapshot> _courseStream =
@@ -75,10 +94,20 @@ class _viewCourseState extends State<viewCourse> {
                                   child: Row(
                                     children: [
                                       IconButton(
-                                          onPressed: () {},
+                                          onPressed: () {
+                                            updateNewCourse(
+                                                document.id,
+                                                data["course_name"],
+                                                data['course_fee'],
+                                                data['img']);
+
+                                            deleteData(document.id);
+                                          },
                                           icon: Icon(Icons.edit)),
                                       IconButton(
-                                          onPressed: () {},
+                                          onPressed: () {
+                                            deleteData(document.id);
+                                          },
                                           icon: Icon(Icons.delete)),
                                     ],
                                   ),
