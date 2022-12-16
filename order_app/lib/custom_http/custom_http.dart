@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:http/http.dart' as http;
+import 'package:order_app/model/category_model.dart';
 import 'package:order_app/screen/widget/common_widget.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -30,5 +31,20 @@ class CustomeHttpRequest {
       orderList.add(orderModel);
     }
     return orderList;
+  }
+
+  static Future<List<CategoryModel>> fetchCategoryData() async {
+    List<CategoryModel> categoryList = [];
+    CategoryModel categoryModel;
+    var uri = "${baseUrl}category";
+    var responce = await http.get(Uri.parse(uri),
+        headers: await CustomeHttpRequest.getHeaderWithToken());
+    var data = jsonDecode(responce.body);
+    print("wwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwww${data}");
+    for (var i in data) {
+      categoryModel = CategoryModel.fromJson(i);
+      categoryList.add(categoryModel);
+    }
+    return categoryList;
   }
 }

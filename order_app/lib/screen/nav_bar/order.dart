@@ -63,40 +63,47 @@ class _OrderPageState extends State<OrderPage> {
         elevation: 0,
         backgroundColor: Colors.grey[200],
       ),
-      body: SingleChildScrollView(
-        child: Column(
-          children: [
-            ListView.builder(
-                physics: NeverScrollableScrollPhysics(),
-                shrinkWrap: true,
-                itemCount: orderList.length,
-                itemBuilder: (context, index) {
-                  return Padding(
-                    padding: const EdgeInsets.all(28.0),
-                    child: Container(
-                      decoration: BoxDecoration(
-                          color: Colors.white,
-                          borderRadius: BorderRadius.circular(20)),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Text("Order id: " + orderList[index].id.toString()),
-                          Column(
-                            children: [
-                              Text("Name: " +
-                                  orderList[index].user!.name.toString()),
-                              Text("Price: " +
-                                  orderList[index].price.toString()),
-                            ],
-                          )
-                        ],
-                      ),
-                    ),
-                  );
-                })
-          ],
-        ),
-      ),
+      body: orderList.isEmpty
+          ? spinkit
+          : SingleChildScrollView(
+              child: Column(
+                children: [
+                  ListView.builder(
+                      physics: NeverScrollableScrollPhysics(),
+                      shrinkWrap: true,
+                      itemCount: orderList.length,
+                      itemBuilder: (context, index) {
+                        var order_status = orderList[index]
+                            .orderStatus!
+                            .orderStatusCategory!
+                            .id;
+                        return Padding(
+                          padding: const EdgeInsets.all(28.0),
+                          child: Container(
+                            decoration: BoxDecoration(
+                                color: Colors.white,
+                                borderRadius: BorderRadius.circular(20)),
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                Text("Order id: " +
+                                    orderList[index].id.toString()),
+                                Column(
+                                  children: [
+                                    Text("Name: " +
+                                        orderList[index].user!.name.toString()),
+                                    Text("Price: " +
+                                        orderList[index].price.toString()),
+                                  ],
+                                )
+                              ],
+                            ),
+                          ),
+                        );
+                      })
+                ],
+              ),
+            ),
     );
   }
 }

@@ -3,6 +3,7 @@ import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 
 String baseUrl = "https://apihomechef.antopolis.xyz/api/admin/";
+String imageUrl = "https://apihomechef.antopolis.xyz/images/";
 
 showInToast(String title) {
   return Fluttertoast.showToast(
