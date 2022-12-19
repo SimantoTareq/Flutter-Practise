@@ -5,6 +5,7 @@ import 'package:order_app/providers/product_provider.dart';
 import 'package:order_app/screen/add._product_page.dart';
 import 'package:order_app/screen/widget/common_widget.dart';
 import 'package:provider/provider.dart';
+import 'package:cached_network_image/cached_network_image.dart';
 
 class productPage extends StatefulWidget {
   const productPage({super.key});
@@ -67,10 +68,21 @@ class _productPageState extends State<productPage> {
                             decoration: BoxDecoration(
                               color: Colors.red,
                               borderRadius: BorderRadius.circular(12),
-                              image: DecorationImage(
-                                  image: NetworkImage(
-                                      "${imageUrl}${productList[index].image.toString()}"),
-                                  fit: BoxFit.cover),
+
+                              //
+                              //
+                              // DecorationImage(
+                              //     image: NetworkImage(
+                              //         "${imageUrl}${productList[index].image.toString()}"),
+                              //     fit: BoxFit.cover),
+                            ),
+                            child: CachedNetworkImage(
+                              imageUrl:
+                                  "${imageUrl}${productList[index].image.toString()}",
+                              placeholder: (context, url) =>
+                                  CircularProgressIndicator(),
+                              errorWidget: (context, url, error) =>
+                                  Icon(Icons.error),
                             ),
                           ),
                         ],
