@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:order_app/providers/category_provider.dart';
 import 'package:order_app/providers/order_provider.dart';
-import 'package:order_app/screen/auth/login_page.dart';
+import 'package:order_app/providers/product_provider.dart';
+
 import 'package:order_app/screen/auth/splash_screen.dart';
 import 'package:provider/provider.dart';
 
@@ -19,6 +20,7 @@ class MyApp extends StatelessWidget {
       providers: [
         ChangeNotifierProvider(create: (context) => OrderProvider()),
         ChangeNotifierProvider(create: (context) => CategoryProvider()),
+        ChangeNotifierProvider(create: (context) => ProductProvider()),
       ],
       child: MaterialApp(
           debugShowCheckedModeBanner: false,

@@ -55,12 +55,15 @@ class _SearchPageState extends State<SearchPage> {
                               onPressed: () {
                                 searchList = [];
                                 Searchcontroller.clear();
+                                print("akjsgdbjfbvsd");
                                 setState(() {});
                               },
                               icon: Icon(Icons.close))),
                       onEditingComplete: () async {
-                        searchList = await CustomeHttp().fetchSearchData(
-                            query: Searchcontroller.text.toString());
+                        print("eeeeeeeeeeeeeeeee");
+                        searchList = await CustomeHttp()
+                            .fetchSearchData(query: Searchcontroller.text);
+                        print("wwwwwwwwww");
                         setState(() {});
                       },
                     ),
