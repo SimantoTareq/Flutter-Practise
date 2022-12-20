@@ -23,7 +23,7 @@ class _loginPageState extends State<loginPage> {
         decoration: BoxDecoration(
           image: DecorationImage(
               image: AssetImage('images/loginpage.png'),
-              alignment: Alignment.topCenter),
+              alignment: Alignment.center),
         ),
         child: Stack(
           children: [
