@@ -26,6 +26,39 @@ class _productPageState extends State<productPage> {
   Widget build(BuildContext context) {
     final productList = Provider.of<ProductProvider>(context).productList;
     return Scaffold(
+      backgroundColor: Colors.grey[200],
+      appBar: AppBar(
+        title: Column(
+          mainAxisAlignment: MainAxisAlignment.start,
+          children: [
+            Align(
+              child: Icon(
+                Icons.arrow_back_outlined,
+                color: Colors.black,
+              ),
+              alignment: Alignment.topLeft,
+            ),
+            Align(
+              child: Text(
+                "Product List",
+                style: TextStyle(color: Colors.black),
+              ),
+              alignment: Alignment.topLeft,
+            ),
+          ],
+        ),
+        actions: [
+          Container(
+            padding: EdgeInsets.all(20),
+            child: Text(
+              productList.length.toString() + "Items ",
+              style: TextStyle(color: Colors.black),
+            ),
+          ),
+        ],
+        elevation: 0,
+        backgroundColor: Colors.grey[200],
+      ),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
           Navigator.of(context)
@@ -35,14 +68,6 @@ class _productPageState extends State<productPage> {
                       .getProductData());
         },
         child: Icon(Icons.add),
-      ),
-      appBar: AppBar(
-        elevation: 0,
-        title: Text(
-          "Product",
-          style: TextStyle(color: Colors.white, fontSize: 26),
-        ),
-        centerTitle: true,
       ),
       body: productList.isEmpty
           ? spinkit
@@ -63,57 +88,82 @@ class _productPageState extends State<productPage> {
                     children: [
                       Stack(
                         children: [
-                          Container(
-                            height: 150,
-                            decoration: BoxDecoration(
-                              color: Colors.red,
-                              borderRadius: BorderRadius.circular(12),
+                          Column(
+                            children: [
+                              Container(
+                                padding: EdgeInsets.all(8),
+                                height: 200,
+                                width: MediaQuery.of(context).size.width * 0.4,
+                                decoration: BoxDecoration(
+                                  color: Color.fromARGB(255, 255, 255, 255),
+                                  borderRadius: BorderRadius.circular(12),
 
-                              //
-                              //
-                              // DecorationImage(
-                              //     image: NetworkImage(
-                              //         "${imageUrl}${productList[index].image.toString()}"),
-                              //     fit: BoxFit.cover),
-                            ),
-                            child: CachedNetworkImage(
-                              imageUrl:
-                                  "${imageUrl}${productList[index].image.toString()}",
-                              placeholder: (context, url) =>
-                                  CircularProgressIndicator(),
-                              errorWidget: (context, url, error) =>
-                                  Icon(Icons.error),
-                            ),
+                                  //
+                                  //
+                                  // DecorationImage(
+                                  //     image: NetworkImage(
+                                  //         "${imageUrl}${productList[index].image.toString()}"),
+                                  //     fit: BoxFit.cover),
+
+                                  boxShadow: [
+                                    BoxShadow(
+                                      color: Colors.grey.withOpacity(0.5),
+                                      spreadRadius: 5,
+                                      blurRadius: 7,
+                                      offset: Offset(
+                                          0, 3), // changes position of shadow
+                                    ),
+                                  ],
+                                ),
+                                child: Column(
+                                  children: [
+                                    CachedNetworkImage(
+                                      imageUrl:
+                                          "${imageUrl}${productList[index].image.toString()}",
+                                      placeholder: (context, url) =>
+                                          CircularProgressIndicator(),
+                                      errorWidget: (context, url, error) =>
+                                          Icon(Icons.error),
+                                      fit: BoxFit.cover,
+                                    ),
+                                    Text(
+                                      productList[index].name.toString(),
+                                      style: TextStyle(
+                                          fontWeight: FontWeight.w700),
+                                    ),
+                                    Text(
+                                      "Quantity: " +
+                                          productList[index]
+                                              .stockItems![0]
+                                              .quantity
+                                              .toString(),
+                                      style: TextStyle(
+                                          fontWeight: FontWeight.w700),
+                                    ),
+                                    Text(
+                                      "Price: " +
+                                          productList[index]
+                                              .price![0]
+                                              .originalPrice
+                                              .toString(),
+                                      style: TextStyle(
+                                          fontWeight: FontWeight.w700),
+                                    ),
+                                    Text(
+                                      "Discount Price: " +
+                                          productList[index]
+                                              .price![0]
+                                              .discountedPrice
+                                              .toString(),
+                                      style: TextStyle(
+                                          fontWeight: FontWeight.w700),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                            ],
                           ),
                         ],
-                      ),
-                      Text(
-                        productList[index].name.toString(),
-                        style: TextStyle(fontWeight: FontWeight.w700),
-                      ),
-                      Text(
-                        "Quantity: " +
-                            productList[index]
-                                .stockItems![0]
-                                .quantity
-                                .toString(),
-                        style: TextStyle(fontWeight: FontWeight.w700),
-                      ),
-                      Text(
-                        "Price: " +
-                            productList[index]
-                                .price![0]
-                                .originalPrice
-                                .toString(),
-                        style: TextStyle(fontWeight: FontWeight.w700),
-                      ),
-                      Text(
-                        "Discount Price: " +
-                            productList[index]
-                                .price![0]
-                                .discountedPrice
-                                .toString(),
-                        style: TextStyle(fontWeight: FontWeight.w700),
                       ),
                     ],
                   ),
