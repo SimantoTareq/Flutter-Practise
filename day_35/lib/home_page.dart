@@ -73,6 +73,7 @@ class _HomePageState extends State<HomePage> {
       opacity: 0.5,
       progressIndicator: spinkit,
       child: Scaffold(
+        backgroundColor: Color(0xffA9B7FF),
         body: ListView.builder(
           itemCount: alldata.length,
           shrinkWrap: true,

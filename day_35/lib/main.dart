@@ -1,4 +1,5 @@
 import 'package:day_35/home_page.dart';
+import 'package:day_35/login_page.dart';
 import 'package:flutter/material.dart';
 
 void main() {
@@ -26,6 +27,6 @@ class MyApp extends StatelessWidget {
           // is not restarted.
           primarySwatch: Colors.blue,
         ),
-        home: HomePage());
+        home: loginPage());
   }
 }
