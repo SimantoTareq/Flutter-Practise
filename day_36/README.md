@@ -7,5 +7,4 @@ Weather App
 
 
 
-[ezgif com-gif-maker](https://user-images.githubusercontent.com/40123885/208637937-4a019dca-c707-4dab-a6f3-799c9b7218fb.gif)
-
+![ezgif com-gif-maker](https://user-images.githubusercontent.com/40123885/208638405-fc33715b-1fd2-48c2-8696-837c4aa00499.gif)
