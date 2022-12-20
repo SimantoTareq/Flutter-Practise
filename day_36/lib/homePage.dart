@@ -9,6 +9,7 @@ import 'package:blurrycontainer/blurrycontainer.dart';
 
 import 'package:http/http.dart' as http;
 import 'package:jiffy/jiffy.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -97,44 +98,62 @@ class _HomePageState extends State<HomePage> {
                             'images/2.png',
                           ),
                           fit: BoxFit.cover)),
-                  padding: EdgeInsets.all(20),
+                  padding: EdgeInsets.symmetric(vertical: 50, horizontal: 20),
                   width: double.infinity,
                   child: Column(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       Align(
                         alignment: Alignment.topRight,
                         child: Column(
                           children: [
                             Text(
-                                "${Jiffy(DateTime.now()).format("MMM do yy, h:mm a")}"),
-                            Text("${weatherMap!["name"]}")
+                              "${Jiffy(DateTime.now()).format("MMM do yy, h:mm a")}",
+                              style: Style(20, Colors.white70),
+                            ),
+                            Text(
+                              "${weatherMap!["name"]}",
+                              style: Style(20, Colors.white70),
+                            )
                           ],
                         ),
                       ),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Image.network(
-                            "http://openweathermap.org/img/wn/${weatherMap!["weather"][0]["icon"]}@2x.png",
-                          ),
-                          Text("${weatherMap!["main"]["temp"]} °"),
-                        ],
+                      Image.network(
+                        "http://openweathermap.org/img/wn/${weatherMap!["weather"][0]["icon"]}@2x.png",
+                        color: Colors.white,
+                      ),
+                      Text(
+                        "${weatherMap!["main"]["temp"]} °",
+                        style: Style(70, Colors.white),
                       ),
                       Column(
                         crossAxisAlignment: CrossAxisAlignment.center,
                         children: [
                           Text(
-                              " Feels Like ${weatherMap!["main"]["feels_like"]} °"),
-                          Text("${weatherMap!["weather"][0]["description"]}")
+                            " Feels Like ${weatherMap!["main"]["feels_like"]} °",
+                            style: Style(
+                              30,
+                              Colors.white30,
+                            ),
+                          ),
+                          Text(
+                            "${weatherMap!["weather"][0]["description"]}",
+                            style: Style(35, Colors.white70),
+                          )
                         ],
                       ),
                       Text(
-                          "Humidity ${weatherMap!["main"]["humidity"]}, Pressure ${weatherMap!["main"]["pressure"]}"),
+                        "Humidity ${weatherMap!["main"]["humidity"]}, Pressure ${weatherMap!["main"]["pressure"]}",
+                        style: Style(20, Colors.white70),
+                      ),
                       Text(
-                          "Sunrise ${Jiffy(DateTime.fromMillisecondsSinceEpoch(weatherMap!["sys"]["sunrise"] * 1000)).format("h:mm a")} , Sunset ${Jiffy(DateTime.fromMillisecondsSinceEpoch(weatherMap!["sys"]["sunset"] * 1000)).format("h:mm a")}"),
+                        "Sunrise ${Jiffy(DateTime.fromMillisecondsSinceEpoch(weatherMap!["sys"]["sunrise"] * 1000)).format("h:mm a")} , Sunset ${Jiffy(DateTime.fromMillisecondsSinceEpoch(weatherMap!["sys"]["sunset"] * 1000)).format("h:mm a")}",
+                        style: Style(20, Colors.white70),
+                      ),
                       SizedBox(
-                        height: 300,
+                        height: MediaQuery.of(context).size.height * .08,
+                      ),
+                      SizedBox(
+                        height: MediaQuery.of(context).size.height * .3,
                         child: ListView.builder(
                           shrinkWrap: true,
                           scrollDirection: Axis.horizontal,
@@ -150,13 +169,19 @@ class _HomePageState extends State<HomePage> {
                                 child: Column(
                                   children: [
                                     Text(
-                                        "${Jiffy(forecastMap!["list"][index]["dt_txt"]).format("EEE h:mm")}"),
+                                      "${Jiffy(forecastMap!["list"][index]["dt_txt"]).format("EEE h:mm")}",
+                                      style: Style(18, Colors.white70),
+                                    ),
                                     Image.network(
                                         "https://openweathermap.org/img/wn/${forecastMap!['list'][index]['weather'][0]['icon']}@2x.png"),
                                     Text(
-                                        "${forecastMap!["list"][index]["main"]["temp_min"]}/${forecastMap!["list"][index]["main"]["temp_max"]}"),
+                                      "${forecastMap!["list"][index]["main"]["temp_min"]}/${forecastMap!["list"][index]["main"]["temp_max"]}",
+                                      style: Style(18, Colors.white70),
+                                    ),
                                     Text(
-                                        "${forecastMap!["list"][index]["weather"][0]["description"]}")
+                                      "${forecastMap!["list"][index]["weather"][0]["description"]}",
+                                      style: Style(18, Colors.white70),
+                                    )
                                   ],
                                 ),
                               ),
@@ -169,7 +194,13 @@ class _HomePageState extends State<HomePage> {
                 ),
               ],
             )
-          : CircularProgressIndicator(),
+          : Container(
+              child: Center(child: Image.asset("images/home2.gif")),
+            ),
     );
   }
+}
+
+Style(double? size, Color clr, [FontWeight? fw]) {
+  return GoogleFonts.lobster(color: clr, fontSize: size, fontWeight: fw);
 }
