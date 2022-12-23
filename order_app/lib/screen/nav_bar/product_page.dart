@@ -3,6 +3,7 @@ import 'package:flutter/src/widgets/container.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:order_app/providers/product_provider.dart';
 import 'package:order_app/screen/add._product_page.dart';
+import 'package:order_app/screen/edit_product_page.dart';
 import 'package:order_app/screen/widget/common_widget.dart';
 import 'package:provider/provider.dart';
 import 'package:cached_network_image/cached_network_image.dart';
@@ -165,6 +166,23 @@ class _productPageState extends State<productPage> {
                           ),
                         ],
                       ),
+                      Row(
+                        children: [
+                          IconButton(
+                            onPressed: () {
+                              Navigator.of(context).push(MaterialPageRoute(
+                                  builder: (context) => EditProductPage(
+                                        productModel: productList[index],
+                                      )));
+                            },
+                            icon: Icon(Icons.edit),
+                          ),
+                          IconButton(
+                            onPressed: () {},
+                            icon: Icon(Icons.delete),
+                          ),
+                        ],
+                      )
                     ],
                   ),
                 );
