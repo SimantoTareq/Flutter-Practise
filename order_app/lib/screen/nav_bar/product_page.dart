@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/container.dart';
 import 'package:flutter/src/widgets/framework.dart';
+import 'package:order_app/custom_http/custom_http.dart';
 import 'package:order_app/providers/product_provider.dart';
 import 'package:order_app/screen/add._product_page.dart';
 import 'package:order_app/screen/edit_product_page.dart';
@@ -170,15 +171,33 @@ class _productPageState extends State<productPage> {
                         children: [
                           IconButton(
                             onPressed: () {
-                              Navigator.of(context).push(MaterialPageRoute(
-                                  builder: (context) => EditProductPage(
-                                        productModel: productList[index],
-                                      )));
+                              Navigator.of(context)
+                                  .push(MaterialPageRoute(
+                                      builder: (context) => EditProductPage(
+                                            productModel: productList[index],
+                                          )))
+                                  .then((value) => Provider.of<ProductProvider>(
+                                          context,
+                                          listen: false)
+                                      .getProductData());
                             },
                             icon: Icon(Icons.edit),
                           ),
                           IconButton(
-                            onPressed: () {},
+                            onPressed: () async {
+                              var result = await CustomeHttpRequest()
+                                  .deleteProduct(
+                                      id: productList[index].id!.toInt());
+                              print("Result is ${result}");
+                              if (result["error"] != null) {
+                                showInToast("${result["error"]}");
+                              } else {
+                                showInToast("${result["message"]}");
+                                Provider.of<ProductProvider>(context,
+                                        listen: false)
+                                    .deleteProductById(index);
+                              }
+                            },
                             icon: Icon(Icons.delete),
                           ),
                         ],

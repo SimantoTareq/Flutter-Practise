@@ -7,5 +7,11 @@ class ProductProvider with ChangeNotifier {
 
   getProductData() async {
     productList = await CustomeHttpRequest.getProductApi();
+    notifyListeners();
+  }
+
+  deleteProductById(int index) {
+    productList.removeAt(index);
+    notifyListeners();
   }
 }

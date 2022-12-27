@@ -66,4 +66,12 @@ class CustomeHttpRequest {
       return productList;
     }
   }
+
+  Future<dynamic> deleteProduct({required int id}) async {
+    var link = "${baseUrl}product/$id/delete";
+    var response =
+        await http.delete(Uri.parse(link), headers: await getHeaderWithToken());
+    var data = jsonDecode(response.body);
+    return data;
+  }
 }

@@ -7,9 +7,6 @@ import 'dart:convert';
 List<ProductModel> productModelFromJson(String str) => List<ProductModel>.from(
     json.decode(str).map((x) => ProductModel.fromJson(x)));
 
-String productModelToJson(List<ProductModel> data) =>
-    json.encode(List<dynamic>.from(data.map((x) => x.toJson())));
-
 class ProductModel {
   ProductModel({
     this.id,
@@ -27,7 +24,7 @@ class ProductModel {
   final String? image;
   final int? isVisible;
   final int? isAvailable;
-  final List<dynamic>? foodItemCategory;
+  final List<FoodItemCategory>? foodItemCategory;
   final List<Price>? price;
   final List<StockItem>? stockItems;
 
@@ -39,7 +36,8 @@ class ProductModel {
         isAvailable: json["is_available"] == null ? null : json["is_available"],
         foodItemCategory: json["food_item_category"] == null
             ? null
-            : List<dynamic>.from(json["food_item_category"].map((x) => x)),
+            : List<FoodItemCategory>.from(json["food_item_category"]
+                .map((x) => FoodItemCategory.fromJson(x))),
         price: json["price"] == null
             ? null
             : List<Price>.from(json["price"].map((x) => Price.fromJson(x))),
@@ -48,22 +46,26 @@ class ProductModel {
             : List<StockItem>.from(
                 json["stock_items"].map((x) => StockItem.fromJson(x))),
       );
+}
+
+class FoodItemCategory {
+  FoodItemCategory({
+    this.id,
+    this.name,
+  });
+
+  final int? id;
+  final String? name;
+
+  factory FoodItemCategory.fromJson(Map<String, dynamic> json) =>
+      FoodItemCategory(
+        id: json["id"] == null ? null : json["id"],
+        name: json["name"] == null ? null : json["name"],
+      );
 
   Map<String, dynamic> toJson() => {
         "id": id == null ? null : id,
         "name": name == null ? null : name,
-        "image": image == null ? null : image,
-        "is_visible": isVisible == null ? null : isVisible,
-        "is_available": isAvailable == null ? null : isAvailable,
-        "food_item_category": foodItemCategory == null
-            ? null
-            : List<dynamic>.from(foodItemCategory!.map((x) => x)),
-        "price": price == null
-            ? null
-            : List<dynamic>.from(price!.map((x) => x.toJson())),
-        "stock_items": stockItems == null
-            ? null
-            : List<dynamic>.from(stockItems!.map((x) => x.toJson())),
       };
 }
 
@@ -79,8 +81,8 @@ class Price {
   final int? originalPrice;
   final int? discountedPrice;
   final String? discountType;
-  final int? fixedValue;
-  final dynamic? percentOf;
+  final dynamic fixedValue;
+  final dynamic percentOf;
 
   factory Price.fromJson(Map<String, dynamic> json) => Price(
         originalPrice:
@@ -89,7 +91,7 @@ class Price {
             json["discounted_price"] == null ? null : json["discounted_price"],
         discountType:
             json["discount_type"] == null ? null : json["discount_type"],
-        fixedValue: json["fixed_value"] == null ? null : json["fixed_value"],
+        fixedValue: json["fixed_value"],
         percentOf: json["percent_of"],
       );
 
@@ -97,7 +99,7 @@ class Price {
         "original_price": originalPrice == null ? null : originalPrice,
         "discounted_price": discountedPrice == null ? null : discountedPrice,
         "discount_type": discountType == null ? null : discountType,
-        "fixed_value": fixedValue == null ? null : fixedValue,
+        "fixed_value": fixedValue,
         "percent_of": percentOf,
       };
 }
