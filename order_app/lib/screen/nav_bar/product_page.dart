@@ -28,7 +28,7 @@ class _productPageState extends State<productPage> {
   Widget build(BuildContext context) {
     final productList = Provider.of<ProductProvider>(context).productList;
     return Scaffold(
-      backgroundColor: Colors.grey[200],
+      backgroundColor: Color(0xffF5EBE0),
       appBar: AppBar(
         title: Column(
           mainAxisAlignment: MainAxisAlignment.start,
@@ -59,9 +59,10 @@ class _productPageState extends State<productPage> {
           ),
         ],
         elevation: 0,
-        backgroundColor: Colors.grey[200],
+        backgroundColor: Color(0xffF5EBE0),
       ),
-      floatingActionButton: FloatingActionButton(
+      floatingActionButton: FloatingActionButton.extended(
+        backgroundColor: Color(0xff2C74B3),
         onPressed: () {
           Navigator.of(context)
               .push(MaterialPageRoute(builder: (context) => AddProductPage()))
@@ -69,13 +70,14 @@ class _productPageState extends State<productPage> {
                   Provider.of<ProductProvider>(context, listen: false)
                       .getProductData());
         },
-        child: Icon(Icons.add),
+        icon: Icon(Icons.add),
+        label: Text("Add Product"),
       ),
       body: productList.isEmpty
           ? spinkit
           : GridView.builder(
               padding:
-                  EdgeInsets.only(top: 10, left: 10, right: 10, bottom: 10),
+                  EdgeInsets.only(top: 10, left: 25, right: 10, bottom: 10),
               shrinkWrap: true,
               itemCount: productList.length,
               gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
@@ -168,37 +170,66 @@ class _productPageState extends State<productPage> {
                         ],
                       ),
                       Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
-                          IconButton(
-                            onPressed: () {
-                              Navigator.of(context)
-                                  .push(MaterialPageRoute(
-                                      builder: (context) => EditProductPage(
-                                            productModel: productList[index],
-                                          )))
-                                  .then((value) => Provider.of<ProductProvider>(
-                                          context,
-                                          listen: false)
-                                      .getProductData());
-                            },
-                            icon: Icon(Icons.edit),
+                          Container(
+                            height: 40,
+                            width: 70,
+                            margin: EdgeInsets.only(top: 6),
+                            padding: EdgeInsets.all(0.1),
+                            decoration: BoxDecoration(
+                              color: Color(0xff7FE9DE).withOpacity(0.5),
+                              borderRadius: BorderRadius.circular(12),
+                            ),
+                            child: IconButton(
+                              onPressed: () {
+                                Navigator.of(context)
+                                    .push(MaterialPageRoute(
+                                        builder: (context) => EditProductPage(
+                                              productModel: productList[index],
+                                            )))
+                                    .then((value) =>
+                                        Provider.of<ProductProvider>(context,
+                                                listen: false)
+                                            .getProductData());
+                              },
+                              icon: Icon(
+                                Icons.edit,
+                                color: Color(0xff66BFBF),
+                              ),
+                            ),
                           ),
-                          IconButton(
-                            onPressed: () async {
-                              var result = await CustomeHttpRequest()
-                                  .deleteProduct(
-                                      id: productList[index].id!.toInt());
-                              print("Result is ${result}");
-                              if (result["error"] != null) {
-                                showInToast("${result["error"]}");
-                              } else {
-                                showInToast("${result["message"]}");
-                                Provider.of<ProductProvider>(context,
-                                        listen: false)
-                                    .deleteProductById(index);
-                              }
-                            },
-                            icon: Icon(Icons.delete),
+                          Container(
+                            height: 40,
+                            width: 70,
+                            margin: EdgeInsets.fromLTRB(0, 6, 16, 0),
+                            padding: EdgeInsets.all(0.1),
+                            decoration: BoxDecoration(
+                              color: Color(0xffD61C4E).withOpacity(0.5),
+                              borderRadius: BorderRadius.circular(12),
+                            ),
+                            child: IconButton(
+                              onPressed: () async {
+                                var result = await CustomeHttpRequest()
+                                    .deleteProduct(
+                                        id: productList[index].id!.toInt());
+                                print("Result is ${result}");
+                                if (result["error"] != null) {
+                                  showInToast("${result["error"]}");
+                                } else {
+                                  showInToast("${result["message"]}");
+                                  Provider.of<ProductProvider>(context,
+                                          listen: false)
+                                      .deleteProductById(index);
+                                }
+                              },
+                              icon: Center(
+                                child: Icon(
+                                  Icons.delete,
+                                  color: Color(0xffEB1D36),
+                                ),
+                              ),
+                            ),
                           ),
                         ],
                       )

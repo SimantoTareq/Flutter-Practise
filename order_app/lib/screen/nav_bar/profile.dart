@@ -1,51 +1,35 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/container.dart';
 import 'package:flutter/src/widgets/framework.dart';
-import 'package:order_app/providers/order_provider.dart';
 import 'package:order_app/screen/auth/login_page.dart';
-import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-class profilePage extends StatefulWidget {
-  const profilePage({super.key});
+class ProfilePage extends StatefulWidget {
+  const ProfilePage({super.key});
 
   @override
-  State<profilePage> createState() => _profilePageState();
+  State<ProfilePage> createState() => _ProfilePageState();
 }
 
-class _profilePageState extends State<profilePage> {
+class _ProfilePageState extends State<ProfilePage> {
   @override
   Widget build(BuildContext context) {
-    final orderList = Provider.of<OrderProvider>(context).orderList;
     double width = MediaQuery.of(context).size.width;
     double height = MediaQuery.of(context).size.height;
-    var order_status = orderList[8].orderStatus!.orderStatusCategory!.id;
-    int ongoing = 0;
-    int complete = 0;
-    int deliver = 0;
-    //print(orderList.length.toString());
-
-    for (var i = 1; i <= orderList.length; i++) {
-      print("object");
-      if (order_status == 1) {
-        ongoing++;
-        print("ok");
-      } else if (order_status == 2) {
-        deliver = deliver + 1;
-      } else {
-        complete = complete + 1;
-      }
-    }
-    ;
-    ongoing;
-    print("${ongoing}");
-
     return Stack(
       fit: StackFit.expand,
       children: [
         Container(
           decoration: BoxDecoration(
-            color: Color(0xffF5EBE0),
+            gradient: LinearGradient(
+              colors: [
+                Color.fromRGBO(4, 9, 35, 1),
+                Color.fromRGBO(39, 105, 171, 1),
+              ],
+              begin: FractionalOffset.bottomCenter,
+              end: FractionalOffset.topCenter,
+            ),
           ),
         ),
         Scaffold(
@@ -74,10 +58,7 @@ class _profilePageState extends State<profilePage> {
                                   builder: (context) => LoginPage()),
                               (route) => false);
                         },
-                        child: Icon(
-                          Icons.logout,
-                          color: Colors.white,
-                        ),
+                        child: Text("Logout"),
                       ),
                     ],
                   ),
@@ -88,7 +69,7 @@ class _profilePageState extends State<profilePage> {
                     'My\nProfile',
                     textAlign: TextAlign.center,
                     style: TextStyle(
-                      color: Color.fromARGB(255, 255, 255, 255),
+                      color: Colors.white,
                       fontSize: 34,
                       fontFamily: 'Nisebuschgardens',
                     ),
@@ -147,7 +128,7 @@ class _profilePageState extends State<profilePage> {
                                               ),
                                             ),
                                             Text(
-                                              '${ongoing}',
+                                              '10',
                                               style: TextStyle(
                                                 color: Color.fromRGBO(
                                                     39, 105, 171, 1),
@@ -159,43 +140,7 @@ class _profilePageState extends State<profilePage> {
                                         ),
                                         Padding(
                                           padding: const EdgeInsets.symmetric(
-                                            horizontal: 15,
-                                            vertical: 8,
-                                          ),
-                                          child: Container(
-                                            height: 50,
-                                            width: 3,
-                                            decoration: BoxDecoration(
-                                              borderRadius:
-                                                  BorderRadius.circular(100),
-                                              color: Colors.grey,
-                                            ),
-                                          ),
-                                        ),
-                                        Column(
-                                          children: [
-                                            Text(
-                                              'Pending',
-                                              style: TextStyle(
-                                                color: Colors.grey[700],
-                                                fontFamily: 'Nunito',
-                                                fontSize: 25,
-                                              ),
-                                            ),
-                                            Text(
-                                              '1',
-                                              style: TextStyle(
-                                                color: Color.fromRGBO(
-                                                    39, 105, 171, 1),
-                                                fontFamily: 'Nunito',
-                                                fontSize: 25,
-                                              ),
-                                            ),
-                                          ],
-                                        ),
-                                        Padding(
-                                          padding: const EdgeInsets.symmetric(
-                                            horizontal: 15,
+                                            horizontal: 25,
                                             vertical: 8,
                                           ),
                                           child: Container(
