@@ -3,6 +3,7 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/container.dart';
 import 'package:flutter/src/widgets/framework.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:order_app/custom_http/custom_http.dart';
 import 'package:order_app/model/category_model.dart';
@@ -73,21 +74,20 @@ class _AddProductPageState extends State<AddProductPage> {
     final weidth = MediaQuery.of(context).size.width;
     return Scaffold(
       backgroundColor: Color(0xffF5EBE0),
-      appBar: AppBar(
-        title: Text("Choose Category"),
-        elevation: 0,
-        backgroundColor: Color(0xffF5EBE0),
-      ),
       body: Container(
-          padding: EdgeInsets.symmetric(horizontal: 20),
+          padding: EdgeInsets.symmetric(horizontal: 20, vertical: 10),
           child: SingleChildScrollView(
             child: Column(
               children: [
+                Text(
+                  "Choose Category",
+                  style: Style(30, Color(0xff0A2647), FontWeight.bold),
+                ),
                 Container(
                   padding: EdgeInsets.symmetric(horizontal: 10),
                   margin: EdgeInsets.symmetric(horizontal: 0, vertical: 10),
                   decoration: BoxDecoration(
-                      color: Color(0xff62B6B7),
+                      color: Color.fromARGB(255, 255, 255, 255),
                       border: Border.all(color: Colors.grey, width: 0.2),
                       borderRadius: BorderRadius.circular(10.0)),
                   height: 60,
@@ -103,7 +103,7 @@ class _AddProductPageState extends State<AddProductPage> {
                       hint: Text(
                         'Select Category',
                         overflow: TextOverflow.ellipsis,
-                        style: TextStyle(color: Colors.black, fontSize: 16),
+                        style: Style(18, Color(0xff0A2647), FontWeight.bold),
                       ),
                       onChanged: (String? newValue) {
                         setState(() {
@@ -119,10 +119,8 @@ class _AddProductPageState extends State<AddProductPage> {
                             return DropdownMenuItem(
                               child: Text(
                                 "${item.name}",
-                                style: TextStyle(
-                                    fontSize: 14,
-                                    color: Colors.black,
-                                    fontWeight: FontWeight.w400),
+                                style: Style(
+                                    18, Color(0xff0A2647), FontWeight.w500),
                                 overflow: TextOverflow.ellipsis,
                                 maxLines: 1,
                               ),
@@ -135,19 +133,31 @@ class _AddProductPageState extends State<AddProductPage> {
                 ),
                 TextField(
                   controller: nameController,
-                  decoration: InputDecoration(hintText: "Enter Product Name"),
+                  decoration: InputDecoration(
+                    hintText: "Enter Product Name",
+                    hintStyle: Style(18, Color(0xff0A2647), FontWeight.w500),
+                  ),
                 ),
                 TextField(
                   controller: quantityController,
-                  decoration: InputDecoration(hintText: "Enter Quantty"),
+                  decoration: InputDecoration(
+                    hintText: "Enter Quantty",
+                    hintStyle: Style(18, Color(0xff0A2647), FontWeight.w500),
+                  ),
                 ),
                 TextField(
                   controller: orginalPriceController,
-                  decoration: InputDecoration(hintText: "Enter Product Price"),
+                  decoration: InputDecoration(
+                    hintText: "Enter Product Price",
+                    hintStyle: Style(18, Color(0xff0A2647), FontWeight.w500),
+                  ),
                 ),
                 TextField(
                   controller: discountPriceController,
-                  decoration: InputDecoration(hintText: "Enter Discount Price"),
+                  decoration: InputDecoration(
+                    hintText: "Enter Discount Price",
+                    hintStyle: Style(18, Color(0xff0A2647), FontWeight.w500),
+                  ),
                 ),
                 SizedBox(
                   height: 10,
@@ -178,10 +188,8 @@ class _AddProductPageState extends State<AddProductPage> {
                                     ),
                                     Text(
                                       "UPLOAD",
-                                      style: TextStyle(
-                                          fontSize: 12,
-                                          fontWeight: FontWeight.w500,
-                                          color: Colors.teal.withOpacity(0.5)),
+                                      style: Style(18, Color(0xff0A2647),
+                                          FontWeight.w500),
                                     ),
                                   ],
                                 ),
@@ -232,7 +240,7 @@ class _AddProductPageState extends State<AddProductPage> {
                 // ),
                 Container(
                   height: 50,
-                  width: 110,
+                  width: 126,
                   margin: EdgeInsets.only(top: 6),
                   padding: EdgeInsets.all(0.1),
                   decoration: BoxDecoration(
@@ -248,7 +256,10 @@ class _AddProductPageState extends State<AddProductPage> {
                       ),
                       child: Row(
                         children: [
-                          Text("Upload"),
+                          Text(
+                            "Upload",
+                            style: Style(18, Colors.white),
+                          ),
                           SizedBox(
                             width: 8,
                           ),
@@ -281,4 +292,8 @@ class _AddProductPageState extends State<AddProductPage> {
       }
     });
   }
+}
+
+Style(double? size, Color clr, [FontWeight? fw]) {
+  return GoogleFonts.roboto(color: clr, fontSize: size, fontWeight: fw);
 }

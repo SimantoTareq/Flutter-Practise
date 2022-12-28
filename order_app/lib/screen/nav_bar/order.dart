@@ -4,6 +4,7 @@ import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/container.dart';
 import 'package:flutter/src/widgets/framework.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:line_icons/line_icon.dart';
 import 'package:order_app/custom_http/custom_http.dart';
 import 'package:order_app/model/order_model.dart';
@@ -33,124 +34,149 @@ class _OrderPageState extends State<OrderPage> {
     final orderList = Provider.of<OrderProvider>(context).orderList;
     return Scaffold(
       backgroundColor: Color(0xffF5EBE0),
-      appBar: AppBar(
-        title: Column(
-          mainAxisAlignment: MainAxisAlignment.start,
-          children: [
-            Align(
-              child: Icon(
-                Icons.arrow_back_outlined,
-                color: Colors.black,
-              ),
-              alignment: Alignment.topLeft,
-            ),
-            Align(
-              child: Text(
-                "Order List",
-                style: TextStyle(color: Colors.black),
-              ),
-              alignment: Alignment.topLeft,
-            ),
-          ],
-        ),
-        actions: [
-          Container(
-            padding: EdgeInsets.all(20),
-            child: Text(
-              orderList.length.toString() + "Items ",
-              style: TextStyle(color: Colors.black),
-            ),
-          ),
-        ],
-        elevation: 0,
-        backgroundColor: Color(0xffF5EBE0),
-      ),
       body: orderList.isEmpty
           ? spinkit
           : SingleChildScrollView(
-              child: Column(
-                children: [
-                  ListView.builder(
-                      physics: NeverScrollableScrollPhysics(),
-                      shrinkWrap: true,
-                      itemCount: orderList.length,
-                      itemBuilder: (context, index) {
-                        var order_status = orderList[index]
-                            .orderStatus!
-                            .orderStatusCategory!
-                            .id;
-                        return Card(
-                          child: Container(
-                            padding: EdgeInsets.all(8),
-                            height: 80,
-                            width: MediaQuery.of(context).size.width * 0.4,
-                            decoration: BoxDecoration(
-                              color: Color.fromARGB(255, 255, 255, 255),
-                              borderRadius: BorderRadius.circular(12),
-                              boxShadow: [
-                                BoxShadow(
-                                  color: Colors.grey.withOpacity(0.5),
-                                  spreadRadius: 5,
-                                  blurRadius: 7,
-                                  offset: Offset(
-                                      0, 3), // changes position of shadow
-                                ),
-                              ],
+              child: Padding(
+                padding: EdgeInsets.symmetric(vertical: 20, horizontal: 6),
+                child: Column(
+                  children: [
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Column(
+                          children: [
+                            Text(
+                              'Order Page',
+                              style:
+                                  Style(30, Color(0xff0A2647), FontWeight.bold),
                             ),
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: [
-                                Column(
-                                  children: [
-                                    Text("Order id: " +
-                                        orderList[index].id.toString()),
-                                    Text("Name: " +
-                                        orderList[index].user!.name.toString()),
-                                  ],
-                                ),
-                                Column(
-                                  children: [
-                                    Text("Price: " +
-                                        orderList[index].price.toString()),
-                                    Container(
-                                      padding: EdgeInsets.all(8),
-                                      decoration: BoxDecoration(
-                                        color: order_status == 1
-                                            ? Color(0xffFED049).withOpacity(0.7)
-                                            : order_status == 2
-                                                ? Color(0xff68B984)
-                                                    .withOpacity(0.7)
-                                                : Color(0xff59C1BD)
-                                                    .withOpacity(0.7),
-                                        borderRadius: BorderRadius.circular(12),
-                                      ),
-                                      child: Row(
-                                        children: [
-                                          Text(order_status == 1
-                                              ? "Ongoing"
-                                              : order_status == 2
-                                                  ? "Delivered"
-                                                  : "Complete"),
-                                          Icon(
-                                            order_status == 1
-                                                ? LineIcons.buffer
-                                                : order_status == 2
-                                                    ? Icons.delivery_dining
-                                                    : Icons.done_all,
-                                          ),
-                                        ],
-                                      ),
-                                    ),
-                                  ],
-                                )
-                              ],
-                            ),
+                          ],
+                        ),
+                        Container(
+                          padding: EdgeInsets.all(20),
+                          child: Text(
+                            orderList.length.toString() + " Items ",
+                            style:
+                                Style(20, Color(0xff0A2647), FontWeight.bold),
                           ),
-                        );
-                      })
-                ],
+                        ),
+                      ],
+                    ),
+                    ListView.builder(
+                        physics: NeverScrollableScrollPhysics(),
+                        shrinkWrap: true,
+                        itemCount: orderList.length,
+                        itemBuilder: (context, index) {
+                          var order_status = orderList[index]
+                              .orderStatus!
+                              .orderStatusCategory!
+                              .id;
+                          return Card(
+                            child: Container(
+                              padding: EdgeInsets.all(8),
+                              height: 80,
+                              width: MediaQuery.of(context).size.width * 0.4,
+                              decoration: BoxDecoration(
+                                color: Color.fromARGB(255, 255, 255, 255),
+                                borderRadius: BorderRadius.circular(12),
+                                boxShadow: [
+                                  BoxShadow(
+                                    color: Colors.grey.withOpacity(0.5),
+                                    spreadRadius: 5,
+                                    blurRadius: 7,
+                                    offset: Offset(
+                                        0, 3), // changes position of shadow
+                                  ),
+                                ],
+                              ),
+                              child: Row(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
+                                children: [
+                                  Column(
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                    children: [
+                                      Text(
+                                        "Order ID: " +
+                                            orderList[index].id.toString(),
+                                        style: Style(18, Color(0xff0A2647),
+                                            FontWeight.w500),
+                                      ),
+                                      SizedBox(
+                                        height: 4,
+                                      ),
+                                      Text(
+                                        "Name: " +
+                                            orderList[index]
+                                                .user!
+                                                .name
+                                                .toString(),
+                                        style: Style(18, Color(0xff0A2647),
+                                            FontWeight.w500),
+                                      ),
+                                    ],
+                                  ),
+                                  Column(
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.center,
+                                    children: [
+                                      Text(
+                                        "Price: " +
+                                            orderList[index].price.toString(),
+                                        style: Style(16, Color(0xff0A2647)),
+                                      ),
+                                      SizedBox(
+                                        height: 2,
+                                      ),
+                                      Container(
+                                        padding: EdgeInsets.all(8),
+                                        decoration: BoxDecoration(
+                                          color: order_status == 1
+                                              ? Color(0xffFED049)
+                                                  .withOpacity(0.7)
+                                              : order_status == 2
+                                                  ? Color(0xff68B984)
+                                                      .withOpacity(0.7)
+                                                  : Color(0xff59C1BD)
+                                                      .withOpacity(0.7),
+                                          borderRadius:
+                                              BorderRadius.circular(12),
+                                        ),
+                                        child: Row(
+                                          children: [
+                                            Text(order_status == 1
+                                                ? "Ongoing"
+                                                : order_status == 2
+                                                    ? "Delivered"
+                                                    : "Complete"),
+                                            Icon(
+                                              order_status == 1
+                                                  ? LineIcons.buffer
+                                                  : order_status == 2
+                                                      ? Icons.delivery_dining
+                                                      : Icons.done_all,
+                                              color: Color(0xff0A2647),
+                                            ),
+                                          ],
+                                        ),
+                                      ),
+                                    ],
+                                  )
+                                ],
+                              ),
+                            ),
+                          );
+                        })
+                  ],
+                ),
               ),
             ),
     );
   }
+}
+
+Style(double? size, Color clr, [FontWeight? fw]) {
+  return GoogleFonts.roboto(color: clr, fontSize: size, fontWeight: fw);
 }

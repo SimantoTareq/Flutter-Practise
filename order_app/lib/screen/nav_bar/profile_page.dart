@@ -3,6 +3,7 @@ import 'package:flutter/src/widgets/container.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:order_app/providers/order_provider.dart';
 import 'package:order_app/screen/auth/login_page.dart';
+import 'package:order_app/screen/nav_bar/order.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -90,7 +91,7 @@ class _profilePageState extends State<profilePage> {
           body: SingleChildScrollView(
             physics: BouncingScrollPhysics(),
             child: Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 73),
+              padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 10),
               child: Column(
                 children: [
                   Row(
@@ -145,11 +146,8 @@ class _profilePageState extends State<profilePage> {
                                     ),
                                     Text(
                                       'Simanto Tareq',
-                                      style: TextStyle(
-                                        color: Color.fromRGBO(39, 105, 171, 1),
-                                        fontFamily: 'Nunito',
-                                        fontSize: 37,
-                                      ),
+                                      style: Style(37, Color(0xff2C74B3),
+                                          FontWeight.bold),
                                     ),
                                     SizedBox(
                                       height: 5,
@@ -160,14 +158,9 @@ class _profilePageState extends State<profilePage> {
                                       children: [
                                         Column(
                                           children: [
-                                            Text(
-                                              'Ongoing',
-                                              style: TextStyle(
-                                                color: Colors.grey[700],
-                                                fontFamily: 'Nunito',
-                                                fontSize: 20,
-                                              ),
-                                            ),
+                                            Text('Ongoing',
+                                                style: Style(
+                                                    20, Color(0xff0A2647))),
                                             Text(
                                               '${ongoing}',
                                               style: TextStyle(
@@ -198,11 +191,8 @@ class _profilePageState extends State<profilePage> {
                                           children: [
                                             Text(
                                               'Complete',
-                                              style: TextStyle(
-                                                color: Colors.grey[700],
-                                                fontFamily: 'Nunito',
-                                                fontSize: 20,
-                                              ),
+                                              style:
+                                                  Style(20, Color(0xff0A2647)),
                                             ),
                                             Text(
                                               '${complete}',
@@ -234,11 +224,8 @@ class _profilePageState extends State<profilePage> {
                                           children: [
                                             Text(
                                               'Delivered',
-                                              style: TextStyle(
-                                                color: Colors.grey[700],
-                                                fontFamily: 'Nunito',
-                                                fontSize: 20,
-                                              ),
+                                              style:
+                                                  Style(20, Color(0xff0A2647)),
                                             ),
                                             Text(
                                               '${deliver}',
@@ -302,11 +289,8 @@ class _profilePageState extends State<profilePage> {
                           ),
                           Text(
                             'My Orders',
-                            style: TextStyle(
-                              color: Color.fromRGBO(39, 105, 171, 1),
-                              fontSize: 27,
-                              fontFamily: 'Nunito',
-                            ),
+                            style:
+                                Style(27, Color(0xff2C74B3), FontWeight.bold),
                           ),
                           Divider(
                             thickness: 2.5,

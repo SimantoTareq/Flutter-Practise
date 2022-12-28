@@ -87,101 +87,99 @@ class _EditProductPageState extends State<EditProductPage> {
 
   @override
   Widget build(BuildContext context) {
-    return SafeArea(
-      child: ModalProgressHUD(
-        inAsyncCall: isLoading == true,
-        blur: 0.5,
-        opacity: 0.5,
-        child: Scaffold(
-          body: Container(
-            child: SingleChildScrollView(
-              child: Column(
-                children: [
-                  Text("Choose Category"),
-                  TextField(
-                    controller: nameController,
-                    decoration: InputDecoration(hintText: "Enter Product Name"),
-                  ),
-                  TextField(
-                    controller: quantityController,
-                    decoration: InputDecoration(hintText: "Enter Quantity"),
-                  ),
-                  TextField(
-                    controller: originalPriceController,
-                    decoration:
-                        InputDecoration(hintText: "Enter Product Price"),
-                  ),
-                  TextField(
-                    controller: discountPriceController,
-                    decoration:
-                        InputDecoration(hintText: "Enter Discount Price"),
-                  ),
-                  SizedBox(
-                    height: 30,
-                  ),
-                  Stack(
-                    children: [
-                      Container(
-                        height: 150,
-                        width: 200,
-                        decoration: BoxDecoration(
-                          color: Colors.black.withOpacity(0.05),
-                          borderRadius: BorderRadius.all(Radius.circular(5)),
-                        ),
-                        child: image == null
-                            ? InkWell(
-                                onTap: () {
-                                  getImageformGallery();
-                                },
-                                child: Image.network(
-                                    "${imageUrl}${widget.productModel!.image}"))
-                            : Container(
-                                height: 150,
-                                width: 200,
-                                child: Image.file(image!),
-                              ),
+    return ModalProgressHUD(
+      inAsyncCall: isLoading == true,
+      blur: 0.5,
+      opacity: 0.5,
+      child: Scaffold(
+        backgroundColor: Color(0xffF5EBE0),
+        body: Container(
+          padding: EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+          child: SingleChildScrollView(
+            child: Column(
+              children: [
+                Text("Choose Category"),
+                TextField(
+                  controller: nameController,
+                  decoration: InputDecoration(hintText: "Enter Product Name"),
+                ),
+                TextField(
+                  controller: quantityController,
+                  decoration: InputDecoration(hintText: "Enter Quantity"),
+                ),
+                TextField(
+                  controller: originalPriceController,
+                  decoration: InputDecoration(hintText: "Enter Product Price"),
+                ),
+                TextField(
+                  controller: discountPriceController,
+                  decoration: InputDecoration(hintText: "Enter Discount Price"),
+                ),
+                SizedBox(
+                  height: 30,
+                ),
+                Stack(
+                  children: [
+                    Container(
+                      height: 150,
+                      width: 200,
+                      decoration: BoxDecoration(
+                        color: Colors.black.withOpacity(0.05),
+                        borderRadius: BorderRadius.all(Radius.circular(5)),
                       ),
-                      Positioned(
-                        bottom: 0,
-                        left: 0,
-                        child: TextButton(
-                          onPressed: () {
-                            getImageformGallery();
-                          },
-                          child: Container(
-                            height: 40,
-                            width: 40,
-                            decoration: BoxDecoration(
-                                borderRadius:
-                                    BorderRadius.all(Radius.circular(50)),
-                                color: Colors.black,
-                                border: Border.all(
-                                    color: Colors.black, width: 1.5)),
-                            child: Center(
-                              child: Container(
-                                height: 20,
-                                width: 20,
-                                child: Icon(Icons.edit),
-                              ),
+                      child: image == null
+                          ? InkWell(
+                              onTap: () {
+                                getImageformGallery();
+                              },
+                              child: Image.network(
+                                  "${imageUrl}${widget.productModel!.image}"))
+                          : Container(
+                              height: 150,
+                              width: 200,
+                              child: Image.file(image!),
+                            ),
+                    ),
+                    Positioned(
+                      bottom: 0,
+                      left: 0,
+                      child: TextButton(
+                        onPressed: () {
+                          getImageformGallery();
+                        },
+                        child: Container(
+                          height: 40,
+                          width: 40,
+                          decoration: BoxDecoration(
+                              borderRadius:
+                                  BorderRadius.all(Radius.circular(50)),
+                              color: Colors.black,
+                              border:
+                                  Border.all(color: Colors.black, width: 1.5)),
+                          child: Center(
+                            child: Container(
+                              height: 20,
+                              width: 20,
+                              child: Icon(Icons.edit),
                             ),
                           ),
                         ),
                       ),
-                    ],
-                  ),
-                  SizedBox(
-                    height: 30,
-                  ),
-                  MaterialButton(
-                    color: Colors.teal,
-                    onPressed: () {
-                      updateProduct();
-                      //   uploadProduct();
-                    },
-                    child: Text("Upload Productt"),
-                  )
-                ],
-              ),
+                    ),
+                  ],
+                ),
+                SizedBox(
+                  height: 30,
+                ),
+                MaterialButton(
+                  color: Colors.teal,
+                  onPressed: () {
+                    updateProduct();
+                    //   uploadProduct();
+                  },
+                  child: Text("Upload Productt"),
+                )
+              ],
             ),
           ),
         ),
