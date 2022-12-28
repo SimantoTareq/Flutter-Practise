@@ -7,6 +7,7 @@ import 'package:line_icons/line_icons.dart';
 import 'package:order_app/screen/nav_bar/category_page.dart';
 import 'package:order_app/screen/nav_bar/order.dart';
 import 'package:order_app/screen/nav_bar/product_page.dart';
+import 'package:order_app/screen/nav_bar/profile.dart';
 import 'package:order_app/screen/nav_bar/profile_page.dart';
 
 class buttom_nav extends StatefulWidget {

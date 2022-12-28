@@ -19,37 +19,74 @@ class _profilePageState extends State<profilePage> {
     final orderList = Provider.of<OrderProvider>(context).orderList;
     double width = MediaQuery.of(context).size.width;
     double height = MediaQuery.of(context).size.height;
-    var order_status = orderList[8].orderStatus!.orderStatusCategory!.id;
+
+    //print(orderList.length.toString());
     int ongoing = 0;
     int complete = 0;
     int deliver = 0;
-    //print(orderList.length.toString());
+    // ListView.builder(
+    //     shrinkWrap: true,
+    //     itemCount: orderList.length,
+    //     itemBuilder: (context, index) {
+    //       var order_status =
+    //           orderList[index].orderStatus!.orderStatusCategory!.id;
 
-    for (var i = 1; i <= orderList.length; i++) {
-      print("object");
-      if (order_status == 1) {
-        ongoing++;
-        print("ok");
-      } else if (order_status == 2) {
-        deliver = deliver + 1;
-      } else {
-        complete = complete + 1;
-      }
-    }
-    ;
-    ongoing;
-    print("${ongoing}");
+    //       // for (int i = 1; i <= orderList.length; i++) {
+    //       //   if (order_status == 1) {
+    //       //     ongoing++;
+    //       //     print("object");
+    //       //   } else if (order_status == 2) {
+    //       //     complete++;
+    //       //     print("obt");
+    //       //   } else {
+    //       //     deliver++;
+    //       //   }
+    //       // }
+    //       // ;
+    //       order_status == 1
+    //           ? ongoing = ongoing + 1
+    //           : order_status == 2
+    //               ? deliver = deliver + 1
+    //               : complete = complete + 1;
+    //       return SizedBox();
+    //     });
 
     return Stack(
       fit: StackFit.expand,
       children: [
-        Container(
-          decoration: BoxDecoration(
-            color: Color(0xffF5EBE0),
-          ),
-        ),
+        ListView.builder(
+            shrinkWrap: true,
+            itemCount: orderList.length,
+            itemBuilder: (context, index) {
+              var order_status =
+                  orderList[index].orderStatus!.orderStatusCategory!.id;
+
+              // for (int i = 1; i <= orderList.length; i++) {
+              //   if (order_status == 1) {
+              //     ongoing++;
+              //     print("object");
+              //   } else if (order_status == 2) {
+              //     complete++;
+              //     print("obt");
+              //   } else {
+              //     deliver++;
+              //   }
+              // }
+              // ;
+              order_status == 1
+                  ? ongoing = ongoing + 1
+                  : order_status == 2
+                      ? deliver = deliver + 1
+                      : complete = complete + 1;
+
+              return Container(
+                decoration: BoxDecoration(
+                  color: Color.fromARGB(255, 154, 120, 84),
+                ),
+              );
+            }),
         Scaffold(
-          backgroundColor: Colors.transparent,
+          backgroundColor: Color(0xffF5EBE0),
           body: SingleChildScrollView(
             physics: BouncingScrollPhysics(),
             child: Padding(
@@ -81,23 +118,8 @@ class _profilePageState extends State<profilePage> {
                       ),
                     ],
                   ),
-                  SizedBox(
-                    height: 20,
-                  ),
-                  Text(
-                    'My\nProfile',
-                    textAlign: TextAlign.center,
-                    style: TextStyle(
-                      color: Color.fromARGB(255, 255, 255, 255),
-                      fontSize: 34,
-                      fontFamily: 'Nisebuschgardens',
-                    ),
-                  ),
-                  SizedBox(
-                    height: 22,
-                  ),
                   Container(
-                    height: height * 0.43,
+                    height: height * 0.5,
                     child: LayoutBuilder(
                       builder: (context, constraints) {
                         double innerHeight = constraints.maxHeight;
@@ -122,7 +144,7 @@ class _profilePageState extends State<profilePage> {
                                       height: 80,
                                     ),
                                     Text(
-                                      'Jhone Doe',
+                                      'Simanto Tareq',
                                       style: TextStyle(
                                         color: Color.fromRGBO(39, 105, 171, 1),
                                         fontFamily: 'Nunito',
@@ -139,11 +161,11 @@ class _profilePageState extends State<profilePage> {
                                         Column(
                                           children: [
                                             Text(
-                                              'Orders',
+                                              'Ongoing',
                                               style: TextStyle(
                                                 color: Colors.grey[700],
                                                 fontFamily: 'Nunito',
-                                                fontSize: 25,
+                                                fontSize: 20,
                                               ),
                                             ),
                                             Text(
@@ -152,7 +174,7 @@ class _profilePageState extends State<profilePage> {
                                                 color: Color.fromRGBO(
                                                     39, 105, 171, 1),
                                                 fontFamily: 'Nunito',
-                                                fontSize: 25,
+                                                fontSize: 20,
                                               ),
                                             ),
                                           ],
@@ -175,20 +197,20 @@ class _profilePageState extends State<profilePage> {
                                         Column(
                                           children: [
                                             Text(
-                                              'Pending',
+                                              'Complete',
                                               style: TextStyle(
                                                 color: Colors.grey[700],
                                                 fontFamily: 'Nunito',
-                                                fontSize: 25,
+                                                fontSize: 20,
                                               ),
                                             ),
                                             Text(
-                                              '1',
+                                              '${complete}',
                                               style: TextStyle(
                                                 color: Color.fromRGBO(
                                                     39, 105, 171, 1),
                                                 fontFamily: 'Nunito',
-                                                fontSize: 25,
+                                                fontSize: 20,
                                               ),
                                             ),
                                           ],
@@ -211,20 +233,20 @@ class _profilePageState extends State<profilePage> {
                                         Column(
                                           children: [
                                             Text(
-                                              'Pending',
+                                              'Delivered',
                                               style: TextStyle(
                                                 color: Colors.grey[700],
                                                 fontFamily: 'Nunito',
-                                                fontSize: 25,
+                                                fontSize: 20,
                                               ),
                                             ),
                                             Text(
-                                              '1',
+                                              '${deliver}',
                                               style: TextStyle(
                                                 color: Color.fromRGBO(
                                                     39, 105, 171, 1),
                                                 fontFamily: 'Nunito',
-                                                fontSize: 25,
+                                                fontSize: 20,
                                               ),
                                             ),
                                           ],
@@ -245,16 +267,14 @@ class _profilePageState extends State<profilePage> {
                               ),
                             ),
                             Positioned(
-                              top: 0,
+                              top: 30,
                               left: 0,
                               right: 0,
                               child: Center(
-                                child: Container(
-                                  child: Image.asset(
-                                    'assets/img/profile.png',
-                                    width: innerWidth * 0.45,
-                                    fit: BoxFit.fitWidth,
-                                  ),
+                                child: CircleAvatar(
+                                  backgroundImage:
+                                      AssetImage('images/tareq.jpg'),
+                                  radius: 80,
                                 ),
                               ),
                             ),
