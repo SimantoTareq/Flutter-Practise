@@ -8,7 +8,7 @@
 
 
 
-| Screen Shot   |      |
+| Screen Shot   |  |
 | :--------     |:---- |
 | Order Page    |      |
 | Category Page  |      |
