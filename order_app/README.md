@@ -7,7 +7,7 @@
 
 
 
-|:-: Order Page|Category Page|Product Page|
+| Order Page|Category Page|Product Page|
 | --------  | -------  | :------------------------- |
 | ![orderPage](https://github.com/SimantoTareq/Flutter-Practise/blob/main/order_app/read/orderPage.PNG)  | ![categoryPage](https://github.com/SimantoTareq/Flutter-Practise/blob/ma:-: in/order_app/read/categoryPage.PNG) |   ![productPage](https://github.com/SimantoTareq/Flutter-Practise/blob/main/order_app/read/productPage.PNG)                          |
 |Add Product|Edit Page|Profile|
