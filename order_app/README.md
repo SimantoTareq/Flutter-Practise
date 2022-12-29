@@ -8,7 +8,7 @@
 
 
 
-| Screen Shot   |    (read\addProductPage.PNG)  |
+| Screen Shot   |  ![Product]!  (read\addProductPage.PNG)  |
 | :--------     |:---- |
 | Order Page    |      |
 | Category Page  |      |
