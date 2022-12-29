@@ -8,7 +8,7 @@
 
 
 
-| Screen Shot   |    (G:\Flutter\Flutter-Practise\order_app\read\addProductPage.PNG)  |
+| Screen Shot   |    (read\addProductPage.PNG)  |
 | :--------     |:---- |
 | Order Page    |      |
 | Category Page  |      |
