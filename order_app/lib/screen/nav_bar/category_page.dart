@@ -30,7 +30,23 @@ class _category_pageState extends State<category_page> {
       body: SingleChildScrollView(
         child: Container(
           padding: EdgeInsets.symmetric(vertical: 20, horizontal: 6),
-          color: Color(0xffF5EBE0),
+          decoration: BoxDecoration(
+            // Box decoration takes a gradient
+            gradient: LinearGradient(
+              // Where the linear gradient begins and ends
+              begin: Alignment.topRight,
+              end: Alignment.bottomLeft,
+              // Add one stop for each color. Stops should increase from 0 to 1
+              stops: [0.1, 0.5, 0.7, 0.9],
+              colors: [
+                // Colors are easy thanks to Flutter's Colors class.
+                Color.fromARGB(255, 163, 201, 225),
+                Color.fromARGB(255, 164, 194, 204),
+                Color.fromARGB(255, 95, 131, 146),
+                Color.fromARGB(255, 78, 111, 137),
+              ],
+            ),
+          ),
           child: SingleChildScrollView(
             child: Column(
               children: [
@@ -99,7 +115,23 @@ class _category_pageState extends State<category_page> {
                 ),
                 Container(
                     height: 50,
-                    color: Color(0xffF5EBE0),
+                    decoration: BoxDecoration(
+                      // Box decoration takes a gradient
+                      gradient: LinearGradient(
+                        // Where the linear gradient begins and ends
+                        begin: Alignment.topRight,
+                        end: Alignment.bottomLeft,
+                        // Add one stop for each color. Stops should increase from 0 to 1
+                        stops: [0.1, 0.5, 0.7, 0.9],
+                        colors: [
+                          // Colors are easy thanks to Flutter's Colors class.
+                          Color.fromARGB(255, 163, 201, 225),
+                          Color.fromARGB(255, 164, 194, 204),
+                          Color.fromARGB(255, 155, 181, 192),
+                          Color.fromARGB(255, 163, 201, 225),
+                        ],
+                      ),
+                    ),
                     child: ListView.builder(
                         //padding: EdgeInsets.all(10),
                         itemCount: categoryList.length,
@@ -113,7 +145,7 @@ class _category_pageState extends State<category_page> {
                                 border: Border.all(width: .7),
                                 boxShadow: [
                                   BoxShadow(
-                                    color: Colors.grey.withOpacity(0.5),
+                                    color: Color.fromARGB(255, 213, 213, 213),
                                     spreadRadius: 2,
                                     blurRadius: 3,
                                     offset: Offset(

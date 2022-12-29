@@ -73,8 +73,26 @@ class _AddProductPageState extends State<AddProductPage> {
     final height = MediaQuery.of(context).size.height;
     final weidth = MediaQuery.of(context).size.width;
     return Scaffold(
-      backgroundColor: Color(0xffF5EBE0),
+      // backgroundColor: Color(0xffF5EBE0),
       body: Container(
+          height: double.infinity,
+          decoration: BoxDecoration(
+            // Box decoration takes a gradient
+            gradient: LinearGradient(
+              // Where the linear gradient begins and ends
+              begin: Alignment.topRight,
+              end: Alignment.bottomLeft,
+              // Add one stop for each color. Stops should increase from 0 to 1
+              stops: [0.1, 0.5, 0.7, 0.9],
+              colors: [
+                // Colors are easy thanks to Flutter's Colors class.
+                Color.fromARGB(255, 163, 201, 225),
+                Color.fromARGB(255, 164, 194, 204),
+                Color.fromARGB(255, 95, 131, 146),
+                Color.fromARGB(255, 78, 111, 137),
+              ],
+            ),
+          ),
           padding: EdgeInsets.symmetric(horizontal: 20, vertical: 10),
           child: SingleChildScrollView(
             child: Column(
