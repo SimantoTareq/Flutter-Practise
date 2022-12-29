@@ -58,7 +58,7 @@ class _category_pageState extends State<category_page> {
                       style: Style(30, Color(0xff0A2647), FontWeight.bold),
                     ),
                     Container(
-                        color: Color.fromARGB(255, 238, 229, 203),
+                        // color: Color.fromARGB(255, 238, 229, 203),
                         padding: EdgeInsets.all(4),
                         child: Icon(
                           Icons.category,
@@ -160,11 +160,14 @@ class _category_pageState extends State<category_page> {
                               height: 60,
                               child: Column(
                                 children: [
-                                  Text(
-                                    categoryList[index].name.toString(),
-                                    style: Style(
-                                      14,
-                                      Color(0xff0A2647),
+                                  Align(
+                                    alignment: Alignment.center,
+                                    child: Text(
+                                      categoryList[index].name.toString(),
+                                      style: Style(
+                                        14,
+                                        Color(0xff0A2647),
+                                      ),
                                     ),
                                   ),
                                 ],
