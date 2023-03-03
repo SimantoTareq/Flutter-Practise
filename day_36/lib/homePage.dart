@@ -98,7 +98,7 @@ class _HomePageState extends State<HomePage> {
                             'images/2.png',
                           ),
                           fit: BoxFit.cover)),
-                  padding: EdgeInsets.symmetric(vertical: 50, horizontal: 20),
+                  padding: EdgeInsets.symmetric(vertical: 20, horizontal: 20),
                   width: double.infinity,
                   child: Column(
                     children: [
